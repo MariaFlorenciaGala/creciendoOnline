@@ -1,4 +1,3 @@
-/* ===== CONFIGURACIÓN: cambiá estos datos por los tuyos ===== */
 const CONFIG = {
   whatsapp: "5493472509569"           // formato internacional sin + ni espacios
 };
@@ -93,11 +92,11 @@ document.querySelectorAll(".work-thumb img").forEach(img => {
   img.addEventListener("load", () => img.parentElement.classList.remove("missing"));
 });
 
-/* Tema claro / oscuro: respeta el del sistema y recuerda la elección del visitante */
+/* Tema claro / oscuro: arranca en claro y recuerda si el visitante elige oscuro */
 (() => {
   const btn = $id("theme-btn"); if (!btn) return;
   const root = document.documentElement;
-  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = () => root.dataset.theme === "dark";  // por defecto, tema claro
   const label = () => btn.setAttribute("aria-label", isDark() ? "Cambiar a tema claro" : "Cambiar a tema oscuro");
   label();
   btn.addEventListener("click", () => {
