@@ -21,12 +21,8 @@
   --r:14px;
   --max:1140px;
 }
-/* TEMA OSCURO (el estilo original) */
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0E1512;--surface:#16201B;--ink:#E8EFEA;--muted:#9DAEA4;--line:#27352E;
-  --brand:#3CC48A;--brand-ink:#06140D;--brand-soft:#173327;--sun:#FFCF5C;--sun-ink:#2A1F00;--hl:rgba(255,207,92,.32);
-  --wa:#2BC266;--serp-link:#9DB8FF;--serp-url:#7ED3A1;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -12px rgba(0,0,0,.6);color-scheme:dark}}
+/* TEMA OSCURO: solo si el visitante lo elige con el botón luna/sol */
+
 :root[data-theme="dark"]{
   --bg:#0E1512;--surface:#16201B;--ink:#E8EFEA;--muted:#9DAEA4;--line:#27352E;
   --brand:#3CC48A;--brand-ink:#06140D;--brand-soft:#173327;--sun:#FFCF5C;--sun-ink:#2A1F00;--hl:rgba(255,207,92,.32);
@@ -296,7 +292,7 @@ a.work:hover .work-thumb img{transform:scale(1.04)}
 .theme-btn .i-sun{display:none}
 :root[data-theme="dark"] .theme-btn .i-sun{display:block}
 :root[data-theme="dark"] .theme-btn .i-moon{display:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn .i-sun{display:block}:root:not([data-theme="light"]) .theme-btn .i-moon{display:none}}
+
 .nav-end{display:flex;align-items:center;gap:10px}
 @media (max-width:440px){.nav .nav-end .btn-wa{display:none}}
 /* Automatizaciones: llamada a la acción */
