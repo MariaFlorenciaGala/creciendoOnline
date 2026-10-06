@@ -1,5 +1,24 @@
 const CONFIG = {
-  whatsapp: "5493472509569"           // formato internacional sin + ni espacios
+  whatsapp: "5493513232653",          // formato internacional sin + ni espacios
+  googleAds: {
+    id: "",                           // tu ID de Google Ads, ej.: "AW-123456789"
+    conversionWhatsapp: ""            // la etiqueta de la conversión, ej.: "AW-123456789/AbC-dEfGh12"
+  }
+};
+
+/* Google Ads: si cargaste el ID arriba, la etiqueta se activa sola */
+(() => {
+  const id = CONFIG.googleAds.id.trim();
+  if (!/^AW-\d+$/.test(id)) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag("js", new Date()); gtag("config", id);
+  const s = document.createElement("script"); s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
+})();
+const contarConsulta = () => {
+  const t = CONFIG.googleAds.conversionWhatsapp.trim();
+  if (t && window.gtag) gtag("event", "conversion", { send_to: t, transport_type: "beacon" });
 };
 /* ========================================================== */
 
@@ -32,10 +51,7 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 document.querySelectorAll(".js-wa").forEach(a => {
   a.href = waLink(a.dataset.msg || "Hola Creciendo Online!");
   a.target = "_blank"; a.rel = "noopener";
-  a.addEventListener("click", () => {
-    // Conversión Google Ads: descomentá y reemplazá AW-XXXX/YYYY
-    // if (window.gtag) gtag('event','conversion',{send_to:'AW-XXXXXXXXX/WHATSAPP'});
-  });
+  a.addEventListener("click", contarConsulta);   // cada clic en WhatsApp = 1 consulta en Google Ads
 });
 
 /* Anuncio simulado en vivo */
@@ -82,6 +98,7 @@ function renderHost(){
 hForm.addEventListener("input", renderHost);
 hForm.addEventListener("change", renderHost);
 hForm.addEventListener("submit", e => e.preventDefault());
+document.getElementById("h-wa").addEventListener("click", contarConsulta);
 renderHost();
 
 /* Miniaturas: si todavía no subiste la imagen, se muestra el nombre del proyecto */
