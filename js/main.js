@@ -1,24 +1,15 @@
 const CONFIG = {
   whatsapp: "5493513232653",          // formato internacional sin + ni espacios
   googleAds: {
-    id: "",                           // tu ID de Google Ads, ej.: "AW-123456789"
-    conversionWhatsapp: ""            // la etiqueta de la conversión, ej.: "AW-123456789/AbC-dEfGh12"
+    id: "AW-18325401950",              // ID de Google Ads (la etiqueta está en el <head> de index.html)
+    conversionWhatsapp: "AW-18325401950/A92PCLOLnfEcEN7inaJE"   // conversión "Whatsapp_Click"
   }
 };
 
-/* Google Ads: si cargaste el ID arriba, la etiqueta se activa sola */
-(() => {
-  const id = CONFIG.googleAds.id.trim();
-  if (!/^AW-\d+$/.test(id)) return;
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function(){ dataLayer.push(arguments); };
-  gtag("js", new Date()); gtag("config", id);
-  const s = document.createElement("script"); s.async = true;
-  s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
-})();
+/* Google Ads: cuenta cada clic a WhatsApp como conversión */
 const contarConsulta = () => {
   const t = CONFIG.googleAds.conversionWhatsapp.trim();
-  if (t && window.gtag) gtag("event", "conversion", { send_to: t, transport_type: "beacon" });
+  if (t && window.gtag) gtag("event", "conversion", { send_to: t, value: 1.0, currency: "ARS", transport_type: "beacon" });
 };
 /* ========================================================== */
 

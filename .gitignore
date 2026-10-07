@@ -1,0 +1,15 @@
+# Material de apoyo que no es parte de la página
+utiles/
+
+# Archivos viejos (si quedaron en la carpeta)
+flyers/
+*.pdf
+README.txt
+anuncios-google-ads.txt
+css/styles-anterior.css
+assets/proyectos/
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
